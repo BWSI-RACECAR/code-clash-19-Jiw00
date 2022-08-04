@@ -29,21 +29,18 @@ class Solution:
         # type m: int
         # type n: int
         # return: int
-        return paths(m-1, n-1, 0,0,0)
-
+        paths = []
         
-        # TODO: Write code below to return an int with the solution to the prompt
-        pass
-
-def paths (m, n, i, j, count):
-    if (i==m and j==n):
-        return count+1
-    elif i==m:
-        return paths(m, n, i, j+1, count)
-    elif j==n:
-        return paths(m,n,i+1,j,count)
-    else:
-        return paths(m, n, i, j+1, count) + paths(m,n,i+1,j,count)
+        for i in range(m):
+            paths.append([1])
+            if i == 0:
+                for j in range(n):
+                    paths[i].append(1)
+            if i != 0:
+                for j in range(1, n):
+                    paths[i].append(paths[i][j - 1] + paths[i - 1][j])
+                paths[i].append(1)
+        return paths[m-1][n-1]
 
     
 
